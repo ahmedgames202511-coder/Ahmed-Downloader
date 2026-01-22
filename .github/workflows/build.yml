@@ -3,26 +3,35 @@ on: [push, workflow_dispatch]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          python-version: '3.9'
 
-      - name: Build with Buildozer
-        uses: ArtemSashko/buildozer-action@v1.6.1
-        with:
-          buildozer_version: master
-          command: buildozer android debug
-          repository_display_name: "Ahmed Downloader"
+      - name: Install System Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good libffi-dev libssl-dev autoconf automake libtool pkg-config cmake
+
+      - name: Install Buildozer and Cython
+        run: |
+          pip install --upgrade pip
+          pip install "cython<3" buildozer
+
+      - name: Build APK
+        run: |
+          # هنا بنخلي السيرفر يوافق على الشروط ويبدأ البناء يدوياً
+          yes | buildozer -v android debug
+        env:
+          ACCEPT_SDK_LICENSE: "yes"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Ahmed-App-Final
+          name: Ahmed-Downloader-Final
           path: bin/*.apk
           
