@@ -1,13 +1,32 @@
 name: Build APK
 on: [push, workflow_dispatch]
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
-      - name: Build with Buildozer
-        uses: ArtemSashko/buildozer-action@v1
+      - uses: actions/checkout@v3
+
+      - name: Get Date
+        id: get-date
+        run: |
+          echo "date=$(date -u +'%Y%m%d')" >> $GITHUB_OUTPUT
+
+      - name: Cache Buildozer
+        uses: actions/cache@v3
         with:
-          buildozer_version: master
+          path: .buildozer
+          key: ${{ runner.os }}-buildozer-${{ steps.get-date.outputs.date }}
+
+      - name: Build with Buildozer
+        uses: Kouber/buildozer-action@v2
+        with:
           command: buildozer android debug
+          buildozer_version: master
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v3
+        with:
+          name: Ahmed-Downloader
+          path: bin/*.apk
           
