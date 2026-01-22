@@ -5,9 +5,8 @@ package.domain = org.ahmed
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-
-# السطر ده هو الأهم، فيه كل المكتبات بنسخها المضمونة
-requirements = python3,kivy==2.2.1,yt-dlp,certifi,requests,urllib3,idna,chardet,hostpython3==3.10.10
+# السطر ده تم تبسيطه لأقصى درجة لضمان عدم حدوث تعارض
+requirements = python3,kivy,yt-dlp,requests,certifi,urllib3,idna,chardet
 
 orientation = portrait
 android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
