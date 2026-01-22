@@ -5,19 +5,17 @@ package.domain = org.ahmed
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
-requirements = python3,kivy,yt-dlp,certifi
+
+# التعديل هنا: ضفنا كل المكتبات المطلوبة بدقة
+requirements = python3,kivy==2.2.1,yt-dlp,certifi,chardet,idna,requests,urllib3
 
 orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 1.9.1
-fullscreen = 0
-
 android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE
-android.api = 33
+android.api = 31
 android.minapi = 21
-android.sdk = 33
+android.sdk = 31
 android.ndk = 25b
-android.archs = arm64-v8a, armeabi-v7a
+android.archs = arm64-v8a
 
 [buildozer]
 log_level = 2
