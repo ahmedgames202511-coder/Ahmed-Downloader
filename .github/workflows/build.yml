@@ -13,10 +13,15 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
       - name: Install System Dependencies
         run: |
           sudo apt update
-          sudo apt install -y build-essential git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good libffi-dev libssl-dev autoconf automake libtool pkg-config cmake zip unzip openjdk-17-jdk
+          sudo apt install -y build-essential git ffmpeg libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev zlib1g-dev libgstreamer1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good libffi-dev libssl-dev autoconf automake libtool pkg-config cmake zip unzip
 
       - name: Install Buildozer and Cython
         run: |
@@ -32,6 +37,6 @@ jobs:
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
-          name: Ahmed-Downloader-Final
+          name: Ahmed-Downloader-App
           path: bin/*.apk
           
