@@ -7,17 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Get Date
-        id: get-date
-        run: |
-          echo "date=$(date -u +'%Y%m%d')" >> $GITHUB_OUTPUT
-
-      - name: Cache Buildozer
-        uses: actions/cache@v3
-        with:
-          path: .buildozer
-          key: ${{ runner.os }}-buildozer-${{ steps.get-date.outputs.date }}
-
       - name: Build with Buildozer
         uses: Kouber/buildozer-action@v2
         with:
